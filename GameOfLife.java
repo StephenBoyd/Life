@@ -34,17 +34,18 @@ public class GameOfLife {
 
 	private static void gridPrint (Cell [][] name){
 		int i;
-		for (i = 0; i < 10; i++) System.out.println("\n \n \n \n \n");
+		for (i = 0; i < 5; i++) System.out.println("\n\n\n\n\n\n\n\n\n\n");
 		System.out.println("Generation: " + generations);
+		StringBuilder matrix = new StringBuilder();
 		for (int x = 0, y = 0; y < name[0].length; x++){
-			System.out.print(name[x][y]);
+			matrix.append(name[x][y]);
 			if (x == (name.length -1)){
 				y++;
 				x = (-1);
-				System.out.println();
+				matrix.append("\n");
 			}
 		}
-		System.out.println();
+		System.out.println(matrix);
 	}
  
 	private static void gridCopier (Cell [][] source, Cell [][] target){
