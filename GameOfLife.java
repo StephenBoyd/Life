@@ -1,5 +1,16 @@
 //Game of Life by Stephen Boyd
-//my attempt at implementing Conway's Game of Life, written December 2012.
+//my attempt at implementing Conway's Game of Life, begun December 2012.
+
+
+// Now this requires a file for a starting pattern,
+// the first program argument:
+// $ java GameOfLife test.txt
+
+// in the input file, periods and spaces are dead cells
+// all other characters are live cells.
+// test.txt is a good example.
+
+
 
 //Uses Cell.java
 //Cell Instance methods are checkLife, kill, birth, and toString.
@@ -24,7 +35,6 @@
 // Live cells: If live neighbours == 2 or 3, birth. Else, kill.
 // Dead cells: If live neighbours == 3, birth. Else, kill.
 
-//Next plans: enable user input to set the starting pattern.
 
 import java.util.Scanner;
 import java.util.ArrayList;
