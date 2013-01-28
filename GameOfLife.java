@@ -26,17 +26,24 @@
 
 //Next plans: enable user input to set the starting pattern.
 
+import java.util.Scanner;
+import java.util.ArrayList;
 import helpful.*;
+import java.io.*;
+import java.io.Reader;
+import java.io.InputStreamReader;
+import java.io.FileReader;
+
 
 public class GameOfLife {
 
 	static int generations = 0;	
 
 	private static void gridPrint (Cell [][] name){
-		int i;
-		for (i = 0; i < 5; i++) System.out.println("\n\n\n\n\n\n\n\n\n\n");
-		System.out.println("Generation: " + generations);
 		StringBuilder matrix = new StringBuilder();
+		matrix.append("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		matrix.append("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		matrix.append("\n\n\n\n\n\n\n  Generation: "+ generations+"\n");
 		for (int x = 0, y = 0; y < name[0].length; x++){
 			matrix.append(name[x][y]);
 			if (x == (name.length -1)){
@@ -107,16 +114,63 @@ public class GameOfLife {
 
 
 public static void main (String[] args){
+	
+	//reads a file, makes and counts a list of lines
+	int height = 0;
+	int width = 0;
+	ArrayList<String> lines = new ArrayList<String>();
+	Scanner s = null;
+	try {
+		do {
+			s = new Scanner(new BufferedReader(new FileReader(args[0])));
+			s.useDelimiter("\\n");
+			for (int i = 0; i < 50; i++){
+				lines.add(s.next());
+				height++;
+				if (s.hasNext() == false){
+					s.close();
+					break;
+				}
+			}
+			s.close();
+			break;	
+		} while (s.hasNext());
+	} catch (IOException e){
+		System.out.println("no file");
+	} catch (ArrayIndexOutOfBoundsException e){
+	} finally {
+		if (s != null) {
+		s.close();
+		}
+	}
 
+	//measures lines to get width, based on shortest line.
+	width = 100;
+	for (int q = 0; q < lines.size(); q++){
+		if (lines.get(q).length() < width)
+			width = lines.get(q).length();
+	}
+	
 	//to change the grid size, just change these 2 numbers.
-	Cell[][] grid1 = new Cell [40][20];
+	Cell[][] grid1 = new Cell [width][height];
 	System.out.println("Length: " + grid1.length);
 	System.out.println("Height: " + grid1[0].length);
 
 	int x;
 	int y;
-  
-	//this initializes the first generation
+  	
+	//initializes 1st generation based on input file
+	for (x = 0, y = 0; y < grid1[0].length; x++){
+		if (lines.get(y).charAt(x) == '.' || lines.get(y).charAt(x) == ' '){
+		grid1[x][y] = new Cell (false);
+		}
+		else grid1[x][y] = new Cell (true);
+		if (x == (grid1.length -1)){
+			y++;
+			x = (-1);
+		}
+	}
+/*	//this initializes the first generation
 	for (x = 0, y = 0; y < grid1[0].length; x++){
 		grid1[x][y] = new Cell (false);
 		if (x == (grid1.length -1)){
@@ -124,14 +178,14 @@ public static void main (String[] args){
 			x = (-1);
 		}
 	}
-  
+*/
 	Cell[][] grid2 = new Cell [grid1.length][grid1[0].length];
 	gridCopier(grid1, grid2);
 
 
 //These are starting patterns, known to do cool repeating things.
 //The best part of this program is experimenting with different patterns.
-
+/*
 	//glider
 	grid1[3][2].birth();
 	grid1[4][3].birth();
@@ -163,7 +217,7 @@ public static void main (String[] args){
 	grid1[28][7].birth();
 
 	gridCopier(grid1, grid2);
-   
+  
 	System.out.println();
 	System.out.println(" Grid 1: ");
 	gridPrint(grid1);
@@ -171,7 +225,7 @@ public static void main (String[] args){
 	System.out.println();
 	System.out.println(" Grid 2: ");
 	gridPrint(grid2);
-
+*/
 
 	boolean loop = true;
 	while (loop == true){
