@@ -19,11 +19,6 @@
 //One is the current generation, the other is the next generation,
 //   and they alternate roles every generation.
 
-//generator computes the next generation's positions
-//   and writes to the other grid (matrix).
-//iterator determines which grid writes to the other.
-
-//Indentation is screwed up because of multiple editors.
 
 //Rules:
 // Any live cell with fewer than two live neighbours dies
@@ -192,50 +187,6 @@ public static void main (String[] args){
 	Cell[][] grid2 = new Cell [grid1.length][grid1[0].length];
 	gridCopier(grid1, grid2);
 
-
-//These are starting patterns, known to do cool repeating things.
-//The best part of this program is experimenting with different patterns.
-/*
-	//glider
-	grid1[3][2].birth();
-	grid1[4][3].birth();
-	grid1[5][3].birth();
-	grid1[3][4].birth();
-	grid1[4][4].birth();  
-
-	//lightweight spaceship
-	grid1[4][14].birth();
-	grid1[5][14].birth();
-	grid1[6][14].birth();
-	grid1[7][14].birth();
-	grid1[3][15].birth();
-	grid1[7][15].birth();
-	grid1[7][16].birth();
-	grid1[3][17].birth();
-	grid1[6][17].birth();
-
-	//ten cell row
-	grid1[19][7].birth();
-	grid1[20][7].birth();
-	grid1[21][7].birth();
-	grid1[22][7].birth();
-	grid1[23][7].birth();
-	grid1[24][7].birth();
-	grid1[25][7].birth();
-	grid1[26][7].birth();
-	grid1[27][7].birth();
-	grid1[28][7].birth();
-
-	gridCopier(grid1, grid2);
-  
-	System.out.println();
-	System.out.println(" Grid 1: ");
-	gridPrint(grid1);
-  
-	System.out.println();
-	System.out.println(" Grid 2: ");
-	gridPrint(grid2);
-*/
 
 	boolean loop = true;
 	while (loop == true){
