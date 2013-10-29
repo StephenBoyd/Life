@@ -71,7 +71,6 @@ public class GameOfLife {
 	}
 
 	//To keep things simple, this skips the grid's perimeter cells.
-	//The redundant variables are for readability.
 	private static void generator (Cell [][] source, Cell [][] target){
 		for (int x = 1, y = 1; y < (source[0].length - 1); x++){
 			boolean nw, n, ne, w, e, sw, s, se;
@@ -85,12 +84,12 @@ public class GameOfLife {
 			se = source[x + 1][y + 1].checkLife();
 			int liveNeighbours = 0;
 			if (nw == true) liveNeighbours++;
-			if (n == true) liveNeighbours++;
+			if (n  == true) liveNeighbours++;
 			if (ne == true) liveNeighbours++;
-			if (w == true) liveNeighbours++;
-			if (e == true) liveNeighbours++;
+			if (w  == true) liveNeighbours++;
+			if (e  == true) liveNeighbours++;
 			if (sw == true) liveNeighbours++;
-			if (s == true) liveNeighbours++;
+			if (s  == true) liveNeighbours++;
 			if (se == true) liveNeighbours++;
 			if (source[x][y].checkLife() == true){
 				if (liveNeighbours == 2 || liveNeighbours == 3) target[x][y].birth();
@@ -188,8 +187,7 @@ public static void main (String[] args){
 	gridCopier(grid1, grid2);
 
 
-	boolean loop = true;
-	while (loop == true){
+	while (true){
 		StephenIO.prompt("Press enter to iterate. Type \"q\" to quit: ");
 		if (StephenIO.readLine().equalsIgnoreCase("q")) return;
 		else if ((generations + 2) % 2 == 0) {
